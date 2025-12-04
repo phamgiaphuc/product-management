@@ -29,7 +29,7 @@
 - [x] Advanced search with filters
 - [x] Validation
 - [x] Sorting
-- [ ] Pagination
+- [x] Pagination
 - [ ] REST API (Bonus)
 
 ## Project Structure

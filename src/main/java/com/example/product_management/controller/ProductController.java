@@ -38,24 +38,18 @@ public class ProductController {
             @RequestParam(defaultValue = "asc") String sortDir,
             Model model) {
 
-        // 1. Clean up empty strings to null for logic consistency
         if (name != null && name.trim().isEmpty()) name = null;
         if (category != null && category.trim().isEmpty()) category = null;
 
-        // 2. Prepare Sort object
         Sort sort = Sort.unsorted();
         if (sortBy != null && !sortBy.isEmpty()) {
             sort = sortDir.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         }
 
-        // 3. Call Service (Handles both Filtering and Sorting)
-        // If no filters are present, this acts like findAll(sort)
         List<Product> products = productService.searchProductsAdvanced(name, category, minPrice, maxPrice, sort);
 
-        // 4. Add data to Model
         model.addAttribute("products", products);
         
-        // Pass back params so the view "remembers" the current state
         model.addAttribute("searchName", name);
         model.addAttribute("searchCategory", category);
         model.addAttribute("searchMinPrice", minPrice);
